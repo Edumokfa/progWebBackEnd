@@ -25,6 +25,6 @@ public class UpdateBrand {
         if (updatedBrand != null) {
             return Response.ok(updatedBrand).build();
         }
-        return Response.status(HttpStatus.NOT_FOUND_404.getStatusCode()).build();
+        return Response.status(HttpStatus.NOT_FOUND_404.getStatusCode()).entity("Marca não encontrada").build();
     }
 }

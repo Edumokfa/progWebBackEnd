@@ -1,0 +1,130 @@
+openapi: 3.0.0
+info:
+  title: API FIPE
+  description: Documentação da API FIPE
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /brand:
+    post:
+      summary: Criar Marca
+      description: Cria uma nova marca.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Brand'
+      responses:
+        '200':
+          description: Marca criada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Brand'
+        '409':
+          description: Marca já cadastrada
+    get:
+      summary: Listar Marcas
+      description: Retorna a lista de todas as marcas.
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Brand'
+  /brand/{brandId}:
+    parameters:
+      - name: brandId
+        in: path
+        required: true
+        description: ID da Marca
+        schema:
+          type: integer
+    delete:
+      summary: Excluir Marca
+      description: Exclui uma marca pelo ID.
+      responses:
+        '200':
+          description: Marca excluída com sucesso
+        '404':
+          description: Marca não encontrada
+  /brand/:
+    put:
+      summary: Atualizar Marca
+      description: Atualiza os detalhes de uma marca.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Brand'
+      responses:
+        '200':
+          description: Marca atualizada com sucesso
+        '404':
+          description: Marca não encontrada
+  /model/{brandId}:
+    parameters:
+      - name: brandId
+        in: path
+        required: true
+        description: ID da Marca
+        schema:
+          type: integer
+    get:
+      summary: Listar Modelos por Marca
+      description: Retorna a lista de modelos para uma marca específica.
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Model'
+components:
+  schemas:
+    Brand:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    Model:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        brandId:
+          type: integer
+        modelYears:
+          type: array
+          items:
+            $ref: '#/components/schemas/Vehicle'
+    Vehicle:
+      type: object
+      properties:
+        fipeCode:
+          type: string
+        type:
+          type: string
+        value:
+          type: number
+          format: double
+        brandId:
+          type: integer
+        modelId:
+          type: integer
+        year:
+          type: integer
+        gas:
+          type: string

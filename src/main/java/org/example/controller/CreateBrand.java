@@ -25,6 +25,6 @@ public class CreateBrand {
         if (updatedBrand != null) {
             return Response.ok(updatedBrand).build();
         }
-        return Response.status(HttpStatus.CONFLICT_409.getStatusCode()).build();
+        return Response.status(HttpStatus.CONFLICT_409.getStatusCode()).entity("Marca já cadastrada").build();
     }
 }

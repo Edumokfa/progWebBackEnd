@@ -24,6 +24,6 @@ public class DeleteBrand {
         if (updatedBrand) {
             return Response.ok().build();
         }
-        return Response.status(HttpStatus.NOT_FOUND_404.getStatusCode()).build();
+        return Response.status(HttpStatus.NOT_FOUND_404.getStatusCode()).entity("Marca não encontrada").build();
     }
 }
