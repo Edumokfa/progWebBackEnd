@@ -1,5 +1,21 @@
-FROM openjdk:18
+FROM maven:3.8.2-openjdk-17 as build
 
-ADD target/integracao-tabela-fipe-mongodb.jar integracaoFipe.jar
+WORKDIR /app
 
-ENTRYPOINT ["java", "-jar", "integracaoFipe.jar"]
+COPY pom.xml .
+COPY src src
+
+RUN mvn install -DskipTests
+
+RUN mkdir -p target/lib && (cd target/lib; jar -xf ../*.jar)
+
+FROM openjdk:17-oracle
+
+WORKDIR /app
+VOLUME /tmp
+COPY --from=build /app/target/lib /app/lib
+COPY --from=build /app/target/classes .
+
+
+EXPOSE 8080
+ENTRYPOINT ["java","-cp","/app:/app/lib/*","org.example.Main"]
