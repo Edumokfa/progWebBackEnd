@@ -1,15 +1,14 @@
 package org.example.service;
 
 import org.example.model.*;
+import org.example.utils.DatabaseCommunication;
 
 import java.util.List;
 
-import static org.example.service.LocalCacheService.LOCAL_CACHE_SERVICE;
-
-public class ModelService {
+public class ModelService extends DatabaseCommunication<Model> {
 
     public List<Model> getAllModelsFromBrand(Integer brandId) {
-        List<Model> modelFromBrand = LOCAL_CACHE_SERVICE.getModelList().stream().filter(model -> model.getBrandId().equals(brandId)).toList();
-        return modelFromBrand;
+        List<Model> model = findFromDatabase("SELECT m FROM Model m WHERE m.brandId.id = " + brandId);
+        return model;
     }
 }

@@ -20,7 +20,7 @@ public class DeleteBrand {
     @Path("{brandId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateBrands(@PathParam("brandId") Integer brandId) {
-        boolean updatedBrand = brandService.deleteBrand(brandId);
+        boolean updatedBrand = brandService.deleteBrand((Integer) brandId);
         if (updatedBrand) {
             return Response.ok().build();
         }

@@ -1,19 +1,34 @@
 package org.example.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import javax.persistence.*;
 import java.io.Serializable;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity
+@Table(name = "brand")
 public class Brand implements Serializable {
 
-    @JsonProperty("codigo")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @JsonProperty("nome")
+    @Column
     private String name;
+
+    public Brand() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

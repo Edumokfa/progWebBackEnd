@@ -1,37 +1,89 @@
 package org.example.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.example.utils.MoneySerializer;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity
+@Table(name = "vehicle")
 public class Vehicle implements Serializable {
 
-    @JsonIgnore
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @JsonProperty("CodigoFipe")
+    @Column
     private String fipeCode;
-    @JsonProperty("TipoVeiculo")
+    @Column
     private String type;
-    @JsonProperty("Valor")
-    @JsonSerialize(using = MoneySerializer.class)
+    @Column
     private BigDecimal value;
-    @JsonProperty("CodigoMarca")
-    private Integer brandId;
-    @JsonProperty("CodigoModelo")
-    private Integer modelId;
-    @JsonProperty("AnoModelo")
+    @ManyToOne
+    @JoinColumn(name = "model_id")
+    @JsonIgnore
+    private Model modelId;
+    @Column
     private Integer year;
-    @JsonProperty("Combustivel")
+    @Column
     private String gas;
 
+    public Vehicle() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getFipeCode() {
+        return fipeCode;
+    }
+
+    public void setFipeCode(String fipeCode) {
+        this.fipeCode = fipeCode;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public BigDecimal getValue() {
+        return value;
+    }
+
+    public void setValue(BigDecimal value) {
+        this.value = value;
+    }
+
+    public Model getModelId() {
+        return modelId;
+    }
+
+    public void setModelId(Model modelId) {
+        this.modelId = modelId;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public String getGas() {
+        return gas;
+    }
+
+    public void setGas(String gas) {
+        this.gas = gas;
+    }
 }
