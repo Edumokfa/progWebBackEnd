@@ -1,4 +1,4 @@
-FROM maven:3.8.2-openjdk-17 as build
+FROM maven:3.8.2-openjdk-11 as build
 
 WORKDIR /app
 
@@ -9,7 +9,7 @@ RUN mvn install -DskipTests
 
 RUN mkdir -p target/lib && (cd target/lib; jar -xf ../*.jar)
 
-FROM openjdk:17-oracle
+FROM openjdk:11-oracle
 
 WORKDIR /app
 VOLUME /tmp
