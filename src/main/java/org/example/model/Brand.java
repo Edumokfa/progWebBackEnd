@@ -1,5 +1,7 @@
 package org.example.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -9,8 +11,10 @@ public class Brand implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("codigo")
     private int id;
     @Column
+    @JsonProperty("nome")
     private String name;
 
     public Brand() {

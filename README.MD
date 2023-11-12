@@ -41,4 +41,4 @@ insert into brand (name) values ('VW'), ('FIAT');
 
 insert into model (name, brand_id) values ('Gol', 1), ('Palio', 2);
 
-insert into vehicle (fipe_code, type, value, model_id, year, gas) values ('45392874892374', 'C', 45000, 1, 2023, 'G'), ('45392874892372', 'C', 30000, 2, 2023, 'G');
+insert into vehicle (fipecode, type, value, model_id, year, gas) values ('45392874892374', 'C', 45000, 1, 2023, 'G'), ('45392874892372', 'C', 30000, 2, 2023, 'G');

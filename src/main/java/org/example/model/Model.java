@@ -1,5 +1,7 @@
 package org.example.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -10,13 +12,16 @@ public class Model implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("codigo")
     private Integer id;
     @Column
+    @JsonProperty("nome")
     private String name;
     @ManyToOne
     @JoinColumn(name = "brand_id")
+    @JsonProperty("marca")
     private Brand brandId;
-
+    @JsonProperty("veiculos")
     @OneToMany(mappedBy = "modelId", fetch = FetchType.EAGER)
     private List<Vehicle> modelYears;
 
